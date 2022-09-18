@@ -11,19 +11,15 @@ app.set( 'view engine', 'ejs' );
 app.set( 'views', 'views' );
 
 // import routers
-const adminRoutes = require( './routes/admin' );
+const shopRoutes = require( './routes/shop' );
 
 // use routes
-app.use( '/', (req, res, next) => {
-    res.render( 'shop/home')
-})
+app.use( '/', shopRoutes );
 
 
 // connect with mongodb and make app listenable from browser
-mongoose.connect( 'mongodb://localhost:27018/week6' )
-    .then( data => {
-        app.listen( 5000 );
-    })
-    .catch( err => {
-        console.log( err );
-    })
+mongoose.connect( "mongodb://localhost:27017/firstP" ).then( data => {
+    app.listen( 5000 );
+}).catch( err => {
+    console.log( err );
+})
