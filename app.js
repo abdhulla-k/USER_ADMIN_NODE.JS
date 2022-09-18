@@ -12,9 +12,11 @@ app.set( 'views', 'views' );
 
 // import routers
 const shopRoutes = require( './routes/shop' );
+const authRouter = require( './routes/auth' );
 
 // use routes
 app.use( '/', shopRoutes );
+app.use( '/auth', authRouter );
 
 
 // connect with mongodb and make app listenable from browser
