@@ -1,8 +1,13 @@
+const path = require( 'path' );
+
 // import express
 const express = require( 'express' );
 
 // import mongoose
 const mongoose = require( 'mongoose' );
+
+// set body-parser
+const bodyParser = require( 'body-parser' );
 
 app = express();
 
@@ -13,6 +18,12 @@ app.set( 'views', 'views' );
 // import routers
 const shopRoutes = require( './routes/shop' );
 const authRouter = require( './routes/auth' );
+
+// set body-parser
+app.use( bodyParser.urlencoded({ extended: false }));   
+
+// set public folder
+app.use( express.static( path.join( __dirname, 'public' )));
 
 // use routes
 app.use( '/', shopRoutes );
