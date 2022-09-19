@@ -1,19 +1,81 @@
 <header>
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand">
-            Navbar
-        </a>
-        <form class="form-inline">
-            <input 
-                class="form-control mr-sm-2" 
-                type="search" 
-                placeholder="Search" 
-                aria-label="Search">
-            <button 
-                class="btn btn-outline-success my-2 my-sm-0 navitem" 
-                type="submit">
-                Search
-            </button>
-        </form>
+    <nav class="navbar-dark bg-dark">
+        <!-- header -->
+        <header>
+
+            <!-- Navbar-->
+            <nav class="navbar navbar-expand-lg">
+             <div class="container-fluid justify-content-between">
+  
+               <!-- Left elements -->
+               <div class="d-flex">
+                 <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+  
+                   <!-- logo -->
+                   <div style="color: white;">
+                       first
+                   </div>
+                   <!-- /logo -->
+  
+                 </a>
+               </div>
+               <!-- Left elements -->
+           
+               <!-- Center elements -->
+               <ul class="navbar-nav flex-row d-none d-lg-flex">
+  
+                 <li class="nav-item me-3 me-lg-1 active" id="color">
+                   <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                     Home
+                   </a>
+                 </li>
+  
+                 <li class="nav-item me-3 me-lg-1">
+                   <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                     Course
+                   </a>
+                 </li>
+  
+                 <li class="nav-item me-3 me-lg-1">
+                   <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                     Your courses
+                   </a>
+                 </li>
+  
+                 <li class="nav-item me-3 me-lg-1">
+                   <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                     Wish list
+                   </a>
+                 </li>
+
+                 <li class="nav-item me-3 me-lg-1">
+                   <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                     Profile
+                   </a>
+                 </li>
+  
+               </ul>
+               <!-- Center elements -->
+           
+               <!-- Right elements -->
+               <ul class="navbar-nav flex-row">
+                  <li class=" dropdown me-3 me-lg-1">
+                   <a href="/auth/login">
+                    <button class="btn btn-light" style="border-radius: 100px; width: 4rem;">Login</button>
+                   </a>
+                  </li>
+  
+                  <li class="d-block d-lg-none nav-item dropdown me-3 me-lg-1">
+                   <a style="color: white;" onclick="openNav()">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list humberger" viewBox="0 0 16 16">
+                       <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                     </svg>
+                   </a>
+                  </li>
+               </ul>
+               <!-- Right elements -->
+             </div>
+            </nav>
+            <!-- /Navbar -->
     </nav>
 </header>
