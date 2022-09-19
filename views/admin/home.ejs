@@ -13,9 +13,8 @@
                   <h5 class="card-title"><%= user.email %></h5>
                   <p class="card-text"><% if( user.admin === true ){ %> admin <% } else { %> user <%}%></p>
                   <div class="d-flex justify-content-center">
-                    <form action="/admin/eidt" method="post">
-                        <button class="btn btn-primary" type="submit">eidt</button>
-                    </form>
+
+                    <a class="btn btn-primary" href="/admin/edit/<%= user.id %>">edit</a>
 
                     <form action="/admin/delete" method="post">
                         <input type="hidden" value="<%= user.id %>" name="productId">

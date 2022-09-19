@@ -10,7 +10,11 @@ router.get( '/', adminController.adminHome );
 
 router.get( '/login', adminController.adminLogin );
 
-router.post( '/delete', adminController.deleteProduct )
+router.post( '/delete', adminController.deleteProduct );
+
+router.get( '/edit/:productId', adminController.editProduct );
+
+router.post( '/update', adminController.updateUser );
 
 
 // export the router
