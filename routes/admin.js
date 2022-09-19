@@ -10,6 +10,8 @@ router.get( '/', adminController.adminHome );
 
 router.get( '/login', adminController.adminLogin );
 
+router.post( '/delete', adminController.deleteProduct )
+
 
 // export the router
 module.exports = router;

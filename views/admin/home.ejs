@@ -12,8 +12,16 @@
                 <div class="card-body">
                   <h5 class="card-title"><%= user.email %></h5>
                   <p class="card-text"><% if( user.admin === true ){ %> admin <% } else { %> user <%}%></p>
-                  <a href="#" class="btn btn-primary">edit</a>
-                  <a href="#" class="btn btn-primary">delete</a>
+                  <div class="d-flex justify-content-center">
+                    <form action="/admin/eidt" method="post">
+                        <button class="btn btn-primary" type="submit">eidt</button>
+                    </form>
+
+                    <form action="/admin/delete" method="post">
+                        <input type="hidden" value="<%= user.id %>" name="productId">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                  </div>
                 </div>
               </div>
               <br>
