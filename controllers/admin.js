@@ -1,16 +1,53 @@
 const Users = require( '../models/user' );
 
 exports.adminHome = ( req, res, next ) => {
-    Users.find({}, ( err, data ) => {
-        if( data ) {
-            res.render( "admin/home", { admin: true, data } );
-        }
-    });
+    if( req.session.loggedin ) {
+        Users.find({}, ( err, data ) => {
+            if( data ) {
+                res.render( "admin/home", { admin: true, data } );
+            }
+        });
+    } else {
+        res.redirect( "/auth/login" );
+    }
 };
 
 exports.adminLogin = ( req, res, next ) => {
     res.redirect( "/auth/login" )
 };
+
+exports.createUser = ( req, res, next ) => {
+    res.render( 'admin/create-user', { admin: true } );
+}
+
+exports.postCreate = ( req, res, next ) => {
+    const firstName = req.body.firstName;
+    const secondName = req.body.secondName;
+    const email = req.body.email;
+    const gender = req.body.gender;
+    const password = req.body.password;
+    const admin = req.body.admin;
+
+    const user = new Users({
+        firstName: firstName,
+        secondName: secondName,
+        email: email,
+        gender: gender,
+        password: password,
+        admin: false
+    })
+
+    // save the user
+    user.save()
+        .then( result => {
+            console.log( "user created" );
+            res.redirect( '/admin' );
+        })
+        .catch( err => {
+            console.log( err );
+            res.redirect( '/admin' );
+        })
+}
 
 exports.editProduct = ( req, res, next ) => {
     const productId = req.params.productId;

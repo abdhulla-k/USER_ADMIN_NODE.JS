@@ -10,6 +10,10 @@ router.get( '/', adminController.adminHome );
 
 router.get( '/login', adminController.adminLogin );
 
+router.get( '/create', adminController.createUser );
+
+router.post( '/createSave', adminController.postCreate );
+
 router.post( '/delete', adminController.deleteProduct );
 
 router.get( '/edit/:productId', adminController.editProduct );

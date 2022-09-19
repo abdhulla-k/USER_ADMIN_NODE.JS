@@ -12,6 +12,7 @@
           <th style="width:20%;">second name</th>
           <th style="width:20%;">email</th>
           <th style="width:20%;">buttons</th>
+          <th style="width:20%;"></th>
         </tr>
         <% for( user of data ) { %>
           <tr>
@@ -20,6 +21,11 @@
             <td><% if( user.admin === true ){ %> admin <% } else { %> user <%}%></td>
             <td>
               <a class="btn btn-primary" href="/admin/edit/<%= user.id %>">edit</a>
+              <form action="/admin/delete" method="post">
+                <input type="hidden" value="<%= user.id %>" name="productId">
+              </form>
+            </td>
+            <td>
               <form action="/admin/delete" method="post">
                 <input type="hidden" value="<%= user.id %>" name="productId">
                 <button class="btn btn-danger" type="submit">Delete</button>
