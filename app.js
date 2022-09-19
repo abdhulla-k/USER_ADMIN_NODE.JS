@@ -33,6 +33,7 @@ app.set( 'views', 'views' );
 // import routers
 const shopRoutes = require( './routes/shop' );
 const authRouter = require( './routes/auth' );
+const adminRoute = require( './routes/admin' );
 
 // set body-parser
 app.use( bodyParser.urlencoded({ extended: false }));   
@@ -43,6 +44,7 @@ app.use( express.static( path.join( __dirname, 'public' )));
 // use routes
 app.use( '/', shopRoutes );
 app.use( '/auth', authRouter );
+app.use( '/admin', adminRoute );
 
 
 // connect with mongodb and make app listenable from browser

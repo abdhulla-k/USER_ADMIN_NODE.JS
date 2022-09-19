@@ -21,41 +21,59 @@
                </div>
                <!-- Left elements -->
            
-               <!-- Center elements -->
-               <ul class="navbar-nav flex-row d-none d-lg-flex">
-  
-                 <li class="nav-item me-3 me-lg-1 active" id="color">
-                   <a style="color: white;" href="/" class="nav-link header-link" href="#">
-                     Home
-                   </a>
-                 </li>
-  
-                 <li class="nav-item me-3 me-lg-1">
-                   <a style="color: white;" href="/" class="nav-link header-link" href="#">
-                     Course
-                   </a>
-                 </li>
-  
-                 <li class="nav-item me-3 me-lg-1">
-                   <a style="color: white;" href="/" class="nav-link header-link" href="#">
-                     Your courses
-                   </a>
-                 </li>
-  
-                 <li class="nav-item me-3 me-lg-1">
-                   <a style="color: white;" href="/" class="nav-link header-link" href="#">
-                     Wish list
-                   </a>
-                 </li>
+               <% if( admin === false ) { %>
+                  <!-- Center elements -->
+                  <ul class="navbar-nav flex-row d-none d-lg-flex">
+                  
+                   <li class="nav-item me-3 me-lg-1 active" id="color">
+                     <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                       Home
+                     </a>
+                   </li>
+                 
+                   <li class="nav-item me-3 me-lg-1">
+                     <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                       Course
+                     </a>
+                   </li>
+                 
+                   <li class="nav-item me-3 me-lg-1">
+                     <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                       Your courses
+                     </a>
+                   </li>
+                 
+                   <li class="nav-item me-3 me-lg-1">
+                     <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                       Wish list
+                     </a>
+                   </li>
+                 
+                   <li class="nav-item me-3 me-lg-1">
+                     <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                       Profile
+                     </a>
+                   </li>
+                 
+                  </ul>
+                  <!-- Center elements -->
+               <% } else { %>
+                <ul class="navbar-nav flex-row d-none d-lg-flex">
+                  
+                  <li class="nav-item me-3 me-lg-1 active" id="color">
+                    <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                      users
+                    </a>
+                  </li>
 
-                 <li class="nav-item me-3 me-lg-1">
-                   <a style="color: white;" href="/" class="nav-link header-link" href="#">
-                     Profile
-                   </a>
-                 </li>
-  
-               </ul>
-               <!-- Center elements -->
+                  <li class="nav-item me-3 me-lg-1 active" id="color">
+                    <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                      products
+                    </a>
+                  </li>
+
+                 </ul>
+               <% } %>
            
                <!-- Right elements -->
                <ul class="navbar-nav flex-row">

@@ -6,7 +6,7 @@ exports.getHome =( req, res, next ) => {
 
     // give access to home if there is session
     if( req.session.loggedIn == true ) {
-        res.render( 'shop/home' );
+        res.render( 'shop/home', { admin: false } );
     } else {
         res.redirect( 'auth/login' );
     }
@@ -26,8 +26,13 @@ exports.postHome = ( req, res, next ) => {
         password: user.password 
     }, ( err, data ) => {
         if( data.length !== 0 ) {
-            req.session.loggedIn = true;
-            res.redirect( '/' );
+            if( data[0].admin === false ) {
+                req.session.loggedIn = true;
+                res.redirect( '/');
+            } else {
+                req.session.loggedIn = true;
+                res.render( 'admin/home', { admin: true });
+            }
         } else {
             console.log( 'user notexist' );
             res.redirect( 'auth/login' );

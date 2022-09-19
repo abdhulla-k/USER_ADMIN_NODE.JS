@@ -12,7 +12,6 @@ exports.registerPost = ( req, res, next ) => {
     const email = req.body.email;
     const gender = req.body.gender;
     const password = req.body.password;
-    const admin = false;
 
 
     // check is user exists allready
@@ -26,7 +25,7 @@ exports.registerPost = ( req, res, next ) => {
                 email: email,
                 gender: gender,
                 password: password,
-                admin: admin
+                admin: false
             })
 
             // save the user
