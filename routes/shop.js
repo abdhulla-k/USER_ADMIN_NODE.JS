@@ -7,7 +7,9 @@ const shopController = require( '../controllers/shop' );
 // use router
 const router = express.Router();
 
-router.get( '/', shopController.getHome )
+router.post( '/', shopController.postHome );
+
+router.get( '/', shopController.getHome );
 
 // export router
 module.exports = router;

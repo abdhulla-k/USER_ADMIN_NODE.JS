@@ -3,6 +3,10 @@ const path = require( 'path' );
 // import express
 const express = require( 'express' );
 
+// import nocatche and session
+const session = require( 'express-session' );
+const nocatche = require( 'nocache' );
+
 // import mongoose
 const mongoose = require( 'mongoose' );
 
@@ -10,6 +14,17 @@ const mongoose = require( 'mongoose' );
 const bodyParser = require( 'body-parser' );
 
 app = express();
+
+// use session
+app.use( session({
+    secret: "key",
+    saveUninitialized: true,
+    resave: false,
+    cookie: { maxAge: 60000 }
+}));
+
+// use nocatche
+app.use( nocatche() );
 
 // set view engin
 app.set( 'view engine', 'ejs' );
