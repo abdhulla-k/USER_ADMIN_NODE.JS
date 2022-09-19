@@ -1,8 +1,13 @@
+const Users = require( '../models/user' );
+
 exports.adminHome = ( req, res, next ) => {
-    res.render( "admin/home", { admin: true } )
-}
+    const users = Users.find({}, ( err, data ) => {
+        if( data ) {
+            res.render( "admin/home", { admin: true, data } );
+        }
+    });
+};
 
 exports.adminLogin = ( req, res, next ) => {
-    console.log( "admin" );
     res.redirect( "/auth/login" )
 };

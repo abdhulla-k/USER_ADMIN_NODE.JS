@@ -4,6 +4,19 @@
 <body>
     <%- include( '../includes/navigation.ejs' ) %>
     <main>
-        <h1>Admin</h1>
+        <% for( user of data ) { %>
+            <div class="card text-center">
+                <div class="card-header">
+                  <%= user.firstName %> <%= user.secondName %>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"><%= user.email %></h5>
+                  <p class="card-text"><% if( user.admin === true ){ %> admin <% } else { %> user <%}%></p>
+                  <a href="#" class="btn btn-primary">edit</a>
+                  <a href="#" class="btn btn-primary">delete</a>
+                </div>
+              </div>
+              <br>
+        <% } %>
     </main>
 <%- include( '../includes/end.ejs') %>
