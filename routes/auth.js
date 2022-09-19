@@ -14,5 +14,8 @@ router.post( '/create',  authController.registerPost );
 // login router
 router.get( '/login', authController.getLogin );
 
+// logout
+router.get( '/logout', authController.logout );
+
 // export router
 module.exports = router

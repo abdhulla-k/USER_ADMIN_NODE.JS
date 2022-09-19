@@ -1,5 +1,5 @@
 exports.adminHome = ( req, res, next ) => {
-    res.render( "" )
+    res.render( "admin/home", { admin: true } )
 }
 
 exports.adminLogin = ( req, res, next ) => {

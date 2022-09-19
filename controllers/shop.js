@@ -31,7 +31,7 @@ exports.postHome = ( req, res, next ) => {
                 res.redirect( '/');
             } else {
                 req.session.loggedIn = true;
-                res.render( 'admin/home', { admin: true });
+                res.redirect( '/admin/' );
             }
         } else {
             console.log( 'user notexist' );

@@ -61,13 +61,13 @@
                 <ul class="navbar-nav flex-row d-none d-lg-flex">
                   
                   <li class="nav-item me-3 me-lg-1 active" id="color">
-                    <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                    <a style="color: white;" href="/admin/" class="nav-link header-link" href="#">
                       users
                     </a>
                   </li>
 
                   <li class="nav-item me-3 me-lg-1 active" id="color">
-                    <a style="color: white;" href="/" class="nav-link header-link" href="#">
+                    <a style="color: white;" href="/admin/" class="nav-link header-link" href="#">
                       products
                     </a>
                   </li>
@@ -78,8 +78,14 @@
                <!-- Right elements -->
                <ul class="navbar-nav flex-row">
                   <li class=" dropdown me-3 me-lg-1">
-                   <a href="/auth/login">
-                    <button class="btn btn-light" style="border-radius: 100px; width: 4rem;">Login</button>
+                   <a href="/auth/logout">
+                    <button class="btn btn-light" style="border-radius: 100px; width: 5rem;">
+                      <% if( admin === true || admin === false ) { %>
+                        Logout
+                      <% } else { %>
+                        Login 
+                      <% } %>
+                    </button>
                    </a>
                   </li>
   

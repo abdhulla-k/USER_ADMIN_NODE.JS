@@ -48,5 +48,14 @@ exports.registerPost = ( req, res, next ) => {
 }
 
 exports.getLogin = ( req, res, next ) => {
-    res.render( 'auth/login' );
+    if( req.session.loggedIn ) {
+        res.redirect( '/' );
+    } else {
+        res.render( 'auth/login' );
+    }
+}
+
+exports.logout = ( req, res, next ) => {
+    req.session.destroy();
+    res.redirect( '/' );
 }
