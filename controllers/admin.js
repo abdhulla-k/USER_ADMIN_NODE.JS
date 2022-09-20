@@ -1,7 +1,7 @@
 const Users = require( '../models/user' );
 
 exports.adminHome = ( req, res, next ) => {
-    if( req.session.loggedin ) {
+    if( req.session.loggedIn ) {
         Users.find({}, ( err, data ) => {
             if( data ) {
                 res.render( "admin/home", { admin: true, data } );
@@ -41,11 +41,11 @@ exports.postCreate = ( req, res, next ) => {
     user.save()
         .then( result => {
             console.log( "user created" );
-            res.redirect( '/admin' );
+            res.redirect( '/admin/' );
         })
         .catch( err => {
             console.log( err );
-            res.redirect( '/admin' );
+            res.redirect( '/admin/' );
         })
 }
 

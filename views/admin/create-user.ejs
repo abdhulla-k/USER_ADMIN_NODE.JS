@@ -4,39 +4,70 @@
 <body>
     <%- include( '../includes/navigation.ejs' ) %>
     <main class="container">
-            <form action="/admin/createSave" method="post">
-                <br>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">First Name</label>
-                  <input type="text" name="firstName" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <br>
+        <form 
+          action="/admin/createSave" 
+          method="post">
+              <br>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">First Name</label>
+                <input 
+                  type="text" 
+                  name="firstName" 
+                  class="form-control" 
+                  id="exampleFormControlInput1" 
+                  placeholder="first name">
+              </div>
+              <br>
 
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Second Name</label>
-                  <input type="text" name="secondName" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <br>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Second Name</label>
+                <input 
+                  type="text" 
+                  name="secondName" 
+                  class="form-control" 
+                  id="exampleFormControlInput1" 
+                  placeholder="second name">
+              </div>
+              <br>
 
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Email</label>
-                  <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <br>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Email</label>
+                <input 
+                  type="email" 
+                  name="email" 
+                  class="form-control" 
+                  id="exampleFormControlInput1" 
+                  placeholder="name@example.com">
+              </div>
+              <br>
 
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Admin or user</label>
-                  <input type="text" name="admin" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <br>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Admin or user</label>
+                <input 
+                  type="text" 
+                  name="admin" 
+                  class="form-control" 
+                  id="exampleFormControlInput1" 
+                  placeholder="true or false">
+              </div>
+              <br>
 
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Password</label>
-                  <input type="password" name="password" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <br>
-                 
-                <button type="submit" class="btn btn-success">update</button>
-            </form>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Password</label>
+                <input 
+                  type="password" 
+                  name="password" 
+                  class="form-control" 
+                  id="exampleFormControlInput1" 
+                  placeholder="password">
+              </div>
+              <br>
+               
+              <button 
+                type="submit" 
+                class="btn btn-success">
+                update
+              </button>
+          </form>
     </main>
 <%- include( '../includes/end.ejs') %>
