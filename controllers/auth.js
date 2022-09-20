@@ -1,7 +1,7 @@
 const User = require( '../models/user' );
 
 exports.getRegister = ( req, res, next ) => {
-    res.render( 'auth/register' );
+    res.render( 'auth/register', { message: '' });
 }
 
 exports.registerPost = ( req, res, next ) => {
@@ -42,7 +42,7 @@ exports.registerPost = ( req, res, next ) => {
 
             // redirect to register page if it exists the email
             console.log( "already exist" );
-            res.redirect( '/auth/register' );
+            res.render( 'auth/register', { message: 'email already exists'} );
         }
     })
 }
