@@ -34,19 +34,26 @@ exports.postCreate = ( req, res, next ) => {
         email: email,
         gender: gender,
         password: password,
-        admin: false
+        admin: Boolean(admin)
     })
 
-    // save the user
-    user.save()
-        .then( result => {
-            console.log( "user created" );
-            res.redirect( '/admin/' );
-        })
-        .catch( err => {
-            console.log( err );
-            res.redirect( '/admin/' );
-        })
+    // check user exist or not
+    Users.find( { email: user.email }, ( err, data ) => {
+        if( data.length > 0 ) {
+            res.render( "error", { message: "email already exist" });
+        } else {
+            // save the user
+            user.save()
+                .then( result => {
+                    console.log( "user created" );
+                    res.redirect( '/admin/' );
+                })
+                .catch( err => {
+                    console.log( err );
+                    res.redirect( '/admin/' );
+                })
+        }
+    })
 }
 
 exports.editProduct = ( req, res, next ) => {
