@@ -36,7 +36,7 @@ exports.postCreate = (req, res, next) => {
     const admin = req.body.admin;
 
     const saltRounds = 10; // this is created to bcrypt the password
-
+    
     // check user exist or not
     Users.find({
         email: email
@@ -60,9 +60,8 @@ exports.postCreate = (req, res, next) => {
                                 email: email,
                                 gender: gender,
                                 password: hash,
-                                admin: Boolean(admin)
+                                admin: admin
                             })
-                            console.log( user );
 
                             // save the user
                             user.save()
