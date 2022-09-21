@@ -74,7 +74,9 @@ exports.getLogin = (req, res, next) => {
     if (req.session.loggedIn) {
         res.redirect('/');
     } else {
-        res.render('auth/login');
+        res.render('auth/login', {
+            message: ''
+        });
     }
 }
 

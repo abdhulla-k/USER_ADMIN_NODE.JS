@@ -24,6 +24,12 @@
                       <input type="password" name="password" id="typePasswordX" class="form-control form-control-lg" />
                       <label class="form-label" for="typePasswordX">Password</label>
                     </div>
+
+                    <% if( message ) {%>
+                      <div class="alert alert-danger" role="alert">
+                          <%= message %>
+                      </div>
+                    <% } %>
       
                     <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                    </form>

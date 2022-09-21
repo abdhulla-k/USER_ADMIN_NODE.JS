@@ -36,7 +36,8 @@ exports.postHome = (req, res, next) => {
                 if (error) {
                     throw error
                 } else if (!isMatch) {
-                    console.log("Password doesn't match!")
+                    console.log("Password doesn't match!");
+                    res.render('auth/login', { message: "invalid email or password" });
                 } else {
                     console.log("Password matches!")
                     if (data[0].admin === false) {
@@ -50,7 +51,7 @@ exports.postHome = (req, res, next) => {
             })
         } else {
             console.log('user notexist');
-            res.redirect('auth/login');
+            res.render('auth/login', { message: "user not exists" });
         }
     })
 }
