@@ -24,131 +24,150 @@ exports.adminLogin = (req, res, next) => {
 };
 
 exports.createUser = (req, res, next) => {
-    res.render('admin/create-user', {
-        admin: true
-    });
+    if( req.session.loggedIn === true ) {
+        res.render('admin/create-user', {
+            admin: true
+        });
+    } else {
+        res.redirect("/auth/login");
+    }
 }
 
 exports.postCreate = (req, res, next) => {
-    const firstName = req.body.firstName;
-    const secondName = req.body.secondName;
-    const email = req.body.email;
-    const gender = req.body.gender;
-    const password = req.body.password;
-    const admin = req.body.admin;
+    if( req.session.loggedIn === true ) {
+        const firstName = req.body.firstName;
+        const secondName = req.body.secondName;
+        const email = req.body.email;
+        const gender = req.body.gender;
+        const password = req.body.password;
+        const admin = req.body.admin;
 
-    const saltRounds = 10; // this is created to bcrypt the password
-    
-    // check user exist or not
-    Users.find({
-        email: email
-    }, (err, data) => {
-        if (data.length > 0) {
-            res.render("error", {
-                message: "email already exist"
-            });
-        } else {
-            bcrypt.genSalt(saltRounds, function (saltError, salt) {
-                if (saltError) {
-                    throw saltError
-                } else {
-                    bcrypt.hash(password, salt, function (hashError, hash) {
-                        if (hashError) {
-                            throw hashError
-                        } else {
-                            const user = new Users({
-                                firstName: firstName,
-                                secondName: secondName,
-                                email: email,
-                                gender: gender,
-                                password: hash,
-                                admin: admin
-                            })
+        const saltRounds = 10; // this is created to bcrypt the password
+        
+        // check user exist or not
+        Users.find({
+            email: email
+        }, (err, data) => {
+            if (data.length > 0) {
+                res.render("error", {
+                    message: "email already exist"
+                });
+            } else {
+                bcrypt.genSalt(saltRounds, function (saltError, salt) {
+                    if (saltError) {
+                        throw saltError
+                    } else {
+                        bcrypt.hash(password, salt, function (hashError, hash) {
+                            if (hashError) {
+                                throw hashError
+                            } else {
+                                const user = new Users({
+                                    firstName: firstName,
+                                    secondName: secondName,
+                                    email: email,
+                                    gender: gender,
+                                    password: hash,
+                                    admin: admin
+                                })
 
-                            // save the user
-                            user.save()
-                                .then(result => {
-                                    console.log("user created");
-                                    res.redirect('/admin/');
-                                })
-                                .catch(err => {
-                                    console.log(err);
-                                    res.redirect('/admin/');
-                                })
-                        }
-                    })
-                }
-            })
-        }
-    })
+                                // save the user
+                                user.save()
+                                    .then(result => {
+                                        console.log("user created");
+                                        res.redirect('/admin/');
+                                    })
+                                    .catch(err => {
+                                        console.log(err);
+                                        res.redirect('/admin/');
+                                    })
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    } else {
+        res.redirect("/auth/login");
+    }
 }
 
 exports.editProduct = (req, res, next) => {
-    const userId = req.params.userId;
-    console.log( userId );
-    Users.findById(userId)
-        .then(userData => {
-            res.render('admin/edit-user', {
-                data: userData,
-                admin: true,
-                message: ''
+    if( req.session.loggedIn === true ) {
+        const userId = req.params.userId;
+        Users.findById(userId)
+            .then(userData => {
+                res.render('admin/edit-user', {
+                    data: userData,
+                    admin: true,
+                    message: ''
+                });
             });
-        });
+    } else {
+        res.redirect("/auth/login");
+    }
 };
 
 exports.updateUser = (req, res, next) => {
 
-    // get admin entered data
-    const userData = {
-        id: req.body.id,
-        firstName: req.body.firstName,
-        secondName: req.body.secondName,
-        email: req.body.email,
-        admin: req.body.admin === 'false' ? false : true
-    }
-
-    // check is the email exist or not
-    Users.find({ email: userData.email }, (err, data) => {
-        if( data.length > 0 && data[0].id != userData.id ) {
-            console.log( "email exist. admin can't update this email" );
-            res.render('admin/edit-user', { 
-                data: userData,
-                admin: true,
-                message: "email exist. you can't update data with this email" 
-            });
-        } else {
-            // if email not exists, get the alled data from data base
-            Users.findById( userData.id )
-                .then( user => {
-
-                    // change the data and save it
-                    user.firstName = userData.firstName;
-                    user.secondName = userData.secondName;
-                    user.email = userData.email;
-                    user.admin = userData.admin;
-                    return user.save();
-                })
-                .then( result => {
-                    res.redirect("/admin/");
-                })
-                .catch( err => {
-                    console.log( err );
-                })
+    if( req.session.loggedIn === true ) {
+        // get admin entered data
+        const userData = {
+            id: req.body.id,
+            firstName: req.body.firstName,
+            secondName: req.body.secondName,
+            email: req.body.email,
+            admin: req.body.admin === 'false' ? false : true
         }
-    })
+
+        // check is the email exist or not
+        Users.find({ email: userData.email }, (err, data) => {
+            if( data.length > 0 && data[0].id != userData.id ) {
+                console.log( "email exist. admin can't update this email" );
+                res.render('admin/edit-user', { 
+                    data: userData,
+                    admin: true,
+                    message: "email exist. you can't update data with this email" 
+                });
+            } else {
+                // if email not exists, get the alled data from data base
+                Users.findById( userData.id )
+                    .then( user => {
+
+                        // change the data and save it
+                        user.firstName = userData.firstName;
+                        user.secondName = userData.secondName;
+                        user.email = userData.email;
+                        user.admin = userData.admin;
+                        return user.save();
+                    })
+                    .then( result => {
+                        res.redirect("/admin/");
+                    })
+                    .catch( err => {
+                        console.log( err );
+                    })
+            }
+        })
+    } else {
+        res.redirect("/auth/login");
+    }
 }
 
 exports.deleteProduct = (req, res, next) => {
-    const productId = req.body.productId
-    Users.findByIdAndRemove(productId)
-        .then(() => {
-            console.log('deleted');
-            res.redirect("/admin");
-        })
-        .catch(err => {
-            console.log(err);
-            res.redirect("/admin");
-        })
+    if( req.session.loggedIn === true ) {
+        const productId = req.body.productId
+        Users.findByIdAndRemove(productId)
+            .then(() => {
+                console.log('deleted');
+                res.redirect("/admin");
+            })
+            .catch(err => {
+                console.log(err);
+                res.redirect("/admin");
+            })
+    } else {
+        res.redirect("/auth/login");
+    }
 }
 
 exports.logout = ( req, res, next ) => {
