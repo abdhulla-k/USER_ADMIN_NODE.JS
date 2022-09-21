@@ -7,6 +7,9 @@ const express = require( 'express' );
 const session = require( 'express-session' );
 const nocatche = require( 'nocache' );
 
+// import morgan
+var morgan = require('morgan'); 
+
 // import mongoose
 const mongoose = require( 'mongoose' );
 
@@ -22,6 +25,8 @@ app.use( session({
     resave: false,
     cookie: { maxAge: 60000 }
 }));
+
+app.use( morgan(':method :url :status :res[content-length] - :response-time ms') );
 
 // use nocatche
 app.use( nocatche() );
