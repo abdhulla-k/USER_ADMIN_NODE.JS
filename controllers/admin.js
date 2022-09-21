@@ -120,7 +120,7 @@ exports.updateUser = (req, res, next) => {
             // if email not exists, get the alled data from data base
             Users.findById( userData.id )
                 .then( user => {
-                    
+
                     // change the data and save it
                     user.firstName = userData.firstName;
                     user.secondName = userData.secondName;
@@ -149,4 +149,9 @@ exports.deleteProduct = (req, res, next) => {
             console.log(err);
             res.redirect("/admin");
         })
+}
+
+exports.logout = ( req, res, next ) => {
+    req.session.loggedIn = false;
+    res.redirect( '/' );
 }

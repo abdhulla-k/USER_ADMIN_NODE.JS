@@ -85,6 +85,6 @@ exports.getLogin = (req, res, next) => {
 }
 
 exports.logout = (req, res, next) => {
-    req.session.destroy();
+    req.session.userLoggedIn = false;
     res.redirect('/');
 }

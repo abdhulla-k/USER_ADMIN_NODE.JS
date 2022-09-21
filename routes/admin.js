@@ -20,6 +20,8 @@ router.get( '/edit/:userId', adminController.editProduct );
 
 router.post( '/update', adminController.updateUser );
 
+router.get( '/logout', adminController.logout );
+
 
 // export the router
 module.exports = router;

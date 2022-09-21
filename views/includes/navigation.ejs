@@ -78,7 +78,7 @@
                <!-- Right elements -->
                <ul class="navbar-nav flex-row">
                   <li class=" dropdown me-3 me-lg-1">
-                   <a href="/auth/logout">
+                   <a href="<% if( admin === true ) { %> /admin/logout <% } else { %> /auth/logout <% } %>">
                     <button class="btn btn-light" style="border-radius: 100px; width: 5rem;">
                       <% if( admin === true || admin === false ) { %>
                         Logout
