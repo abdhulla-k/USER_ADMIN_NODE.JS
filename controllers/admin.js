@@ -1,5 +1,7 @@
 const bcrypt = require("bcryptjs")
 
+const mongoose = require( 'mongoose' );
+
 const Users = require('../models/user');
 
 exports.adminHome = (req, res, next) => {
@@ -87,7 +89,8 @@ exports.editProduct = (req, res, next) => {
         .then(userData => {
             res.render('admin/edit-user', {
                 data: userData,
-                admin: true
+                admin: true,
+                message: ''
             });
         });
 };
@@ -99,15 +102,34 @@ exports.updateUser = (req, res, next) => {
     const email = req.body.email;
     const admin = req.body.admin;
 
-    Users.updateOne({
-        id: id,
-        admin: admin
-    }, {
-        firstName: firstName,
-        secondName: secondName,
-        email: email
-    }).then(() => {
-        res.redirect("/admin/");
+    const userData = {
+        id: req.body.id,
+        firstName: req.body.firstName,
+        secondName: req.body.secondName,
+        email: req.body.email,
+        admin: req.body.admin
+    }
+
+    Users.find({ email: email }, (err, data) => {
+        if( data.length > 0 && data[0].id != userData.id ) {
+            console.log( "email exist. admin can't update this email" );
+            res.render('admin/edit-user', { 
+                data: userData,
+                admin: true,
+                message: "email exist. you can't update data with this email" 
+            });
+        } else {
+            Users.updateOne({
+                id: id,
+                admin: admin
+            }, {
+                firstName: firstName,
+                secondName: secondName,
+                email: email
+            }).then(() => {
+                res.redirect("/admin/");
+            })
+        }
     })
 }
 
