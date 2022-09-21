@@ -16,7 +16,7 @@ router.post( '/createSave', adminController.postCreate );
 
 router.post( '/delete', adminController.deleteProduct );
 
-router.get( '/edit/:productId', adminController.editProduct );
+router.get( '/edit/:userId', adminController.editProduct );
 
 router.post( '/update', adminController.updateUser );
 

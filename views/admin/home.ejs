@@ -11,6 +11,7 @@
           <th style="width:20%;">Name</th>
           <th style="width:20%;">Email</th>
           <th style="width:20%;">User Type</th>
+          <th style="width:20%;">id</th>
           <th style="width:1%;">buttons</th>
           <th style="width:1%;"></th>
         </tr>
@@ -19,6 +20,7 @@
             <td><%= user.firstName %> <%= user.secondName %></td>
             <td><%= user.email %></td>
             <td><% if( user.admin === true ){ %> admin <% } else { %> user <%}%></td>
+            <td><%= user.id %></td>
             <td>
               <a class="btn btn-primary" href="/admin/edit/<%= user.id %>">edit</a>
               <form action="/admin/delete" method="post">

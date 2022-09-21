@@ -72,11 +72,15 @@ exports.registerPost = (req, res, next) => {
 
 exports.getLogin = (req, res, next) => {
     if (req.session.loggedIn) {
-        res.redirect('/');
+        res.redirect('/admin/');
     } else {
-        res.render('auth/login', {
-            message: ''
-        });
+        if( req.session.userLoggedIn) {
+            res.redirect( '/' );
+        } else {
+            res.render('auth/login', {
+                message: ''
+            });
+        }
     }
 }
 

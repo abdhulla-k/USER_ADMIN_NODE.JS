@@ -84,8 +84,9 @@ exports.postCreate = (req, res, next) => {
 }
 
 exports.editProduct = (req, res, next) => {
-    const productId = req.params.productId;
-    Users.findById(productId)
+    const userId = req.params.userId;
+    console.log( userId );
+    Users.findById(userId)
         .then(userData => {
             res.render('admin/edit-user', {
                 data: userData,
@@ -96,21 +97,18 @@ exports.editProduct = (req, res, next) => {
 };
 
 exports.updateUser = (req, res, next) => {
-    const id = req.body.id;
-    const firstName = req.body.firstName;
-    const secondName = req.body.secondName;
-    const email = req.body.email;
-    const admin = req.body.admin;
 
+    // get admin entered data
     const userData = {
         id: req.body.id,
         firstName: req.body.firstName,
         secondName: req.body.secondName,
         email: req.body.email,
-        admin: req.body.admin
+        admin: req.body.admin === 'false' ? false : true
     }
 
-    Users.find({ email: email }, (err, data) => {
+    // check is the email exist or not
+    Users.find({ email: userData.email }, (err, data) => {
         if( data.length > 0 && data[0].id != userData.id ) {
             console.log( "email exist. admin can't update this email" );
             res.render('admin/edit-user', { 
@@ -119,16 +117,23 @@ exports.updateUser = (req, res, next) => {
                 message: "email exist. you can't update data with this email" 
             });
         } else {
-            Users.updateOne({
-                id: id,
-                admin: admin
-            }, {
-                firstName: firstName,
-                secondName: secondName,
-                email: email
-            }).then(() => {
-                res.redirect("/admin/");
-            })
+            // if email not exists, get the alled data from data base
+            Users.findById( userData.id )
+                .then( user => {
+                    
+                    // change the data and save it
+                    user.firstName = userData.firstName;
+                    user.secondName = userData.secondName;
+                    user.email = userData.email;
+                    user.admin = userData.admin;
+                    return user.save();
+                })
+                .then( result => {
+                    res.redirect("/admin/");
+                })
+                .catch( err => {
+                    console.log( err );
+                })
         }
     })
 }
