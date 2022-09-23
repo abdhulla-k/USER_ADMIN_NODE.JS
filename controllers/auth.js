@@ -3,9 +3,13 @@ const bcrypt = require("bcryptjs") // module to bcrypt password
 const User = require('../models/user');
 
 exports.getRegister = (req, res, next) => {
-    res.render('auth/register', {
-        message: ''
-    });
+    if( req.session.loggedIn === false || req.session.userLoggedIn === false ) {
+        res.render('auth/register', {
+            message: ''
+        });
+    } else {
+        res.redirect( '/' );
+    }
 }
 
 exports.registerPost = (req, res, next) => {
